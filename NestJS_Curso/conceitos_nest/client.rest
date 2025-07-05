@@ -5,25 +5,31 @@
 GET {{baseUrl}}/recados/
 ?limit=100&offset=0
 ### LISTA UM RECADO
-GET {{baseUrl}}/recados/1/
+GET {{baseUrl}}/recados/2/
 ### CRIA UM RECADO
 POST {{baseUrl}}/recados/
 Content-Type: application/json
 
 {
-    "recado": "Este é o racado q estou enviando",
-    "nova chave": "outro valor"
+    "texto": "Novo recado",
+    "de": "Joana",
+    "para": "João",
+    "lido": false,
+    "data": "2025-07-05T22:25:38.146Z"
 }
 ### ATUALIZA UM RECADO
-PATCH {{baseUrl}}/recados/1/
+PATCH {{baseUrl}}/recados/2/
 Content-Type: application/json
 
 {
-    "recado": "Este é o racado q estou enviando",
-    "atualizar": true
+    "texto": "Atualizar recado",
+    "de": "Joana",
+    "para": "João",
+    "lido": false,
+    "data": "2025-07-05T22:25:38.146Z"
 }
 ### APAGA UM RECADO
-DELETE {{baseUrl}}/recados/1/
+DELETE {{baseUrl}}/recados/2/
 
 
 
