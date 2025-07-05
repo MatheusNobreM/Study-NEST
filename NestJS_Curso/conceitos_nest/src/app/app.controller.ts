@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller('home')
@@ -14,6 +14,4 @@ export class AppController {
   exemplo() {
     return 'Exemplo de rota';
   }
-
-  
 }

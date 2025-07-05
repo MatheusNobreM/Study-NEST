@@ -3,6 +3,7 @@
 # RECADOS
 ### LISTA TODOS OS RECADOS
 GET {{baseUrl}}/recados/
+?limit=100&offset=0
 ### LISTA UM RECADO
 GET {{baseUrl}}/recados/1/
 ### CRIA UM RECADO
