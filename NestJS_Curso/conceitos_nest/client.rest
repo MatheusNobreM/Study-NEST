@@ -1,10 +1,28 @@
 @baseUrl = http://localhost:3000
 
 # RECADOS
-###
+### LISTA TODOS OS RECADOS
 GET {{baseUrl}}/recados/
-###
-GET {{baseUrl}}/recados/12/
+### LISTA UM RECADO
+GET {{baseUrl}}/recados/1/
+### CRIA UM RECADO
+POST {{baseUrl}}/recados/
+Content-Type: application/json
+
+{
+    "recado": "Este é o racado q estou enviando",
+    "nova chave": "outro valor"
+}
+### ATUALIZA UM RECADO
+PATCH {{baseUrl}}/recados/1/
+Content-Type: application/json
+
+{
+    "recado": "Este é o racado q estou enviando",
+    "atualizar": true
+}
+### APAGA UM RECADO
+DELETE {{baseUrl}}/recados/1/
 
 
 
