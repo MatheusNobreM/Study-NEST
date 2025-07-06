@@ -1,20 +1,20 @@
-import { IsEmpty, IsString, MaxLength, MinLength } from "class-validator";
+import { IsEmpty, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
 
 export class CreateRecadoDto {
   @IsString()
-  @IsEmpty()
+  @IsNotEmpty()
   @MinLength(5)
   @MaxLength(255)
   readonly texto: string;
 
   @IsString()
-  @IsEmpty()
+  @IsNotEmpty()
   @MinLength(2)
   @MaxLength(50)
   readonly de: string;
 
   @IsString()
-  @IsEmpty()
+  @IsNotEmpty()
   @MinLength(2)
   @MaxLength(50)
   readonly para: string;
