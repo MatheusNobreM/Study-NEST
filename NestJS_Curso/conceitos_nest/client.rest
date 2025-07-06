@@ -13,11 +13,8 @@ Content-Type: application/json
 {
     "texto": "Novo recado",
     "de": "Joana",
-    "para": "João",
-    "lido": false,
-    "data": "2025-07-05T22:25:38.146Z"
+    "para": "João"
 }
-
 ### ATUALIZA UM RECADO
 PATCH {{baseUrl}}/recados/2/
 Content-Type: application/json
