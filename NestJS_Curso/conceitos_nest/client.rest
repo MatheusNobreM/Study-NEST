@@ -24,7 +24,7 @@ Content-Type: application/json
     "para": "João"
 }
 ### APAGA UM RECADO
-DELETE {{baseUrl}}/recados/2/
+DELETE {{baseUrl}}/recados/3/
 
 ### AppControllerGetHello 
 

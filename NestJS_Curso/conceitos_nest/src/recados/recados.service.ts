@@ -24,7 +24,7 @@ export class RecadosService {
     },
   ];
 
-  throwNotFoundException(){
+  throwNotFoundError(){
     //throw new HttpException('Recado não encontrado.', HttpStatus.NOT_FOUND);
     throw new NotFoundException('Recado não encontrado');
   }
@@ -44,21 +44,20 @@ export class RecadosService {
 
     if (recado) return recado;
 
-    this.throwNotFoundException();
+    this.throwNotFoundError();
   }
 
-  create( createRecadoDto: CreateRecadoDto) {
-    this.lastId++;
-    const id = this.lastId;
+  async create( createRecadoDto: CreateRecadoDto) {
+  
     const novoRecado = {
-      id,
       ...createRecadoDto,
       lido: false,
       data: new Date(),
     };
-    this.recados.push(novoRecado);
 
-    return novoRecado;
+    const recado = await this.recadoRepository.create(novoRecado);
+
+    return this.recadoRepository.save(recado);
   }
 
   update(id: number, updateRecadoDto: UpdateRecadoDto) {
@@ -67,7 +66,7 @@ export class RecadosService {
     );
 
     if (recadoExistenteIndex < 0) {
-      this.throwNotFoundException();
+      this.throwNotFoundError();
     }
 
     if (recadoExistenteIndex >= 0) {
@@ -82,21 +81,16 @@ export class RecadosService {
     return this.recados[recadoExistenteIndex];
   }
 
-  remove(id: number) {
-    const recadoExistenteIndex = this.recados.findIndex(
-      item => item.id === id,
-    );
+  async remove(id: number) {
+    const recado = await this.recadoRepository.findOneBy({
+      id,
+    });
 
-    if (recadoExistenteIndex < 0) {
-      this.throwNotFoundException();
-    }
+    if (!recado) return this.throwNotFoundError();
 
-    const recado = this.recados[recadoExistenteIndex];
-    this.recados.splice(recadoExistenteIndex, 1)
-
-    return recado;
+    return this.recadoRepository.remove(recado);
+    
   }
 
-
-
+  
 }
