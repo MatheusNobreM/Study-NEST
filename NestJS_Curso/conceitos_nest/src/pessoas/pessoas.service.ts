@@ -4,7 +4,7 @@ import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 
 @Injectable()
 export class PessoasService {
-  create(createPessoaDto: CreatePessoaDto) {
+  async create(createPessoaDto: CreatePessoaDto) {
     return 'This action adds a new pessoa';
   }
 
