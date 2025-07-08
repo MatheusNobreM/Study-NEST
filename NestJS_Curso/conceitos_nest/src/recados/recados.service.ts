@@ -12,17 +12,17 @@ export class RecadosService {
     private readonly recadoRepository: Repository<Recado>,
   ) {}
 
-  private lastId = 1;
-  private recados: Recado[] = [
-    {
-      id: 1,
-      texto: 'Este é um recado de teste',
-      de: 'Joana',
-      para: "João",
-      lido: false,
-      data: new Date(),
-    },
-  ];
+  // private lastId = 1;
+  // private recados: Recado[] = [
+  //   {
+  //     id: 1,
+  //     texto: 'Este é um recado de teste',
+  //     de: 'Joana',
+  //     para: "João",
+  //     lido: false,
+  //     data: new Date(),
+  //   },
+  // ];
 
   throwNotFoundError(){
     //throw new HttpException('Recado não encontrado.', HttpStatus.NOT_FOUND);
@@ -60,25 +60,19 @@ export class RecadosService {
     return this.recadoRepository.save(recado);
   }
 
-  update(id: number, updateRecadoDto: UpdateRecadoDto) {
-    const recadoExistenteIndex = this.recados.findIndex(
-      item => item.id === +id,
-    );
-
-    if (recadoExistenteIndex < 0) {
-      this.throwNotFoundError();
+  async update(id: number, updateRecadoDto: UpdateRecadoDto) {
+    const partialUpdateRecadoDTO = {
+      lido: updateRecadoDto?.lido,
+      texto: updateRecadoDto?.texto,
     }
+    const recado = await this.recadoRepository.preload({
+      id,
+      ...updateRecadoDto,
+    });
 
-    if (recadoExistenteIndex >= 0) {
-      const recadoExistente = this.recados[recadoExistenteIndex];
+    if (!recado) return this.throwNotFoundError();
 
-      this.recados[recadoExistenteIndex] = {
-        ...recadoExistente,
-        ...updateRecadoDto,
-      };
-    }
-
-    return this.recados[recadoExistenteIndex];
+    return this.recadoRepository.save(recado);
   }
 
   async remove(id: number) {

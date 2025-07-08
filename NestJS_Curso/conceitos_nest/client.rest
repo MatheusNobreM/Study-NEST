@@ -20,8 +20,7 @@ PATCH {{baseUrl}}/recados/2/
 Content-Type: application/json
 
 {
-    "texto": "Atualizar recado",
-    "para": "João"
+    "texto": "Atualizar1 recado"
 }
 ### APAGA UM RECADO
 DELETE {{baseUrl}}/recados/3/
