@@ -1,9 +1,9 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { Recado } from "./entities/recado.entity";
-import { CreateRecadoDto } from "./dto/create-recado.dto";
-import { UpdateRecadoDto } from "./dto/update-recados.dto";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Recado } from './entities/recado.entity';
+import { CreateRecadoDto } from './dto/create-recado.dto';
+import { UpdateRecadoDto } from './dto/update-recados.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class RecadosService {
@@ -24,7 +24,7 @@ export class RecadosService {
   //   },
   // ];
 
-  throwNotFoundError(){
+  throwNotFoundError() {
     //throw new HttpException('Recado não encontrado.', HttpStatus.NOT_FOUND);
     throw new NotFoundException('Recado não encontrado');
   }
@@ -39,16 +39,15 @@ export class RecadosService {
     const recado = await this.recadoRepository.findOne({
       where: {
         id,
-      }
-    })
+      },
+    });
 
     if (recado) return recado;
 
     this.throwNotFoundError();
   }
 
-  async create( createRecadoDto: CreateRecadoDto) {
-  
+  async create(createRecadoDto: CreateRecadoDto) {
     const novoRecado = {
       ...createRecadoDto,
       lido: false,
@@ -64,7 +63,7 @@ export class RecadosService {
     const partialUpdateRecadoDTO = {
       lido: updateRecadoDto?.lido,
       texto: updateRecadoDto?.texto,
-    }
+    };
     const recado = await this.recadoRepository.preload({
       id,
       ...updateRecadoDto,
@@ -83,8 +82,5 @@ export class RecadosService {
     if (!recado) return this.throwNotFoundError();
 
     return this.recadoRepository.remove(recado);
-    
   }
-
-  
 }
