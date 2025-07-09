@@ -25,6 +25,26 @@ Content-Type: application/json
 ### APAGA UM RECADO
 DELETE {{baseUrl}}/recados/3/
 
+
+#
+
+
+# Pessoas
+### LISTA TODAS AS PESSOAS
+GET {{baseUrl}}/pessoas/
+?limit=100&offset=0
+### LISTA UM Pessoa
+GET {{baseUrl}}/pessoas/2/
+### CRIA UM Pessoa
+POST {{baseUrl}}/pessoas/
+Content-Type: application/json
+
+{
+    "email": "email@email.com",
+    "password": "123456",
+    "nome": "Matheus"
+}
+
 ### AppControllerGetHello 
 
  # @name AppControllerGetHello
