@@ -32,7 +32,22 @@ export class RecadosService {
   }
 
   async findAll() {
-    const recado = await this.recadoRepository.find();
+    const recado = await this.recadoRepository.find({
+      relations: ['de', 'para'],
+      order: {
+        id: 'desc',
+      },
+      select: {
+        de: {
+          id: true,
+          nome: true,
+        },
+        para: {
+          id: true,
+          nome: true,
+        }
+      }
+    });
     return recado;
   }
 
@@ -42,6 +57,17 @@ export class RecadosService {
       where: {
         id,
       },
+      relations: ['de', 'para'],
+      select: {
+        de: {
+          id: true,
+          nome: true,
+        },
+        para: {
+          id: true,
+          nome: true,
+        }
+      }
     });
 
     if (recado) return recado;
@@ -50,18 +76,31 @@ export class RecadosService {
   }
 
   async create(createRecadoDto: CreateRecadoDto) {
-    //const de = await this.pessoasService.findOne(createRecadoDto.de)
+    const { deId, paraId } = createRecadoDto;
 
+    const de = await this.pessoasService.findOne(deId);
+
+    const para = await this.pessoasService.findOne(paraId);
 
     const novoRecado = {
-      ...createRecadoDto,
+      texto: createRecadoDto.texto,
+      de,
+      para,
       lido: false,
       data: new Date(),
     };
 
     const recado = await this.recadoRepository.create(novoRecado);
-
-    return this.recadoRepository.save(recado);
+    await this.recadoRepository.save(recado);
+    return {
+      ...recado,
+      de: {
+        id: recado.de.id,
+      },
+      para: {
+         id: recado.para.id,
+      },
+    };
   }
 
   async update(id: number, updateRecadoDto: UpdateRecadoDto) {

@@ -5,15 +5,15 @@
 GET {{baseUrl}}/recados/
 ?limit=100&offset=0
 ### LISTA UM RECADO
-GET {{baseUrl}}/recados/2/
+GET {{baseUrl}}/recados/7/
 ### CRIA UM RECADO
 POST {{baseUrl}}/recados/
 Content-Type: application/json
 
 {
     "texto": "Novo recado",
-    "de": "Joana",
-    "para": "João"
+    "deId": 8,
+    "paraId": 9
 }
 ### ATUALIZA UM RECADO
 PATCH {{baseUrl}}/recados/2/
@@ -40,7 +40,7 @@ POST {{baseUrl}}/pessoas/
 Content-Type: application/json
 
 {
-    "email": "email1@email.com",
+    "email": "luiz@email.com",
     "password": "123456",
     "nome": "Matheus"
 }
