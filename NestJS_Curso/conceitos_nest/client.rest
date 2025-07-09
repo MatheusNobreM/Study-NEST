@@ -34,7 +34,7 @@ DELETE {{baseUrl}}/recados/3/
 GET {{baseUrl}}/pessoas/
 ?limit=100&offset=0
 ### LISTA UM Pessoa
-GET {{baseUrl}}/pessoas/2/
+GET {{baseUrl}}/pessoas/7/
 ### CRIA UM Pessoa
 POST {{baseUrl}}/pessoas/
 Content-Type: application/json
@@ -45,11 +45,12 @@ Content-Type: application/json
     "nome": "Matheus"
 }
 ### ATUALIZA UMA PESSOA
-PATCH {{baseUrl}}/pessoas/2/
+PATCH {{baseUrl}}/pessoas/7/
 Content-Type: application/json
 
 {
-    "texto": "Atualizar1 recado"
+    "password": "12345678",
+    "nome": "Matheus M"
 }
 ### APAGA UMA PESSOA
 DELETE {{baseUrl}}/pessoas/4/
