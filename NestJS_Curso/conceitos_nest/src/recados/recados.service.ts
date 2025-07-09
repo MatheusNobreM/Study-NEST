@@ -4,12 +4,14 @@ import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recados.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { PessoasService } from 'src/pessoas/pessoas.service';
 
 @Injectable()
 export class RecadosService {
   constructor(
     @InjectRepository(Recado)
     private readonly recadoRepository: Repository<Recado>,
+    private readonly pessoasService: PessoasService,
   ) {}
 
   // private lastId = 1;
@@ -48,6 +50,9 @@ export class RecadosService {
   }
 
   async create(createRecadoDto: CreateRecadoDto) {
+    //const de = await this.pessoasService.findOne(createRecadoDto.de)
+
+
     const novoRecado = {
       ...createRecadoDto,
       lido: false,
