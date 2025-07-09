@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -27,14 +27,20 @@ export class PessoasService {
       if(error.code === '23505'){
         throw new ConflictException('E-mail já está cadastrado.');
       }
-      
+
       throw error;
     }
     
   }
 
-  findAll() {
-    return `This action returns all pessoas`;
+  async findAll() {
+    const pessoas = await this.pessoaRepository.find({
+      order: {
+        id: 'desc',
+      },
+    });
+
+    return pessoas;
   }
 
   findOne(id: number) {
@@ -45,7 +51,15 @@ export class PessoasService {
     return `This action updates a #${id} pessoa`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pessoa`;
+  async remove(id: number) {
+    const pessoa = await this.pessoaRepository.findOneBy({
+      id,
+    });
+
+    if(!pessoa) {
+      throw new NotFoundException('Pessoa não encontrada');
+    }
+
+    return this.pessoaRepository.remove(pessoa);
   }
 }

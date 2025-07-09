@@ -40,10 +40,23 @@ POST {{baseUrl}}/pessoas/
 Content-Type: application/json
 
 {
-    "email": "email@email.com",
+    "email": "email1@email.com",
     "password": "123456",
     "nome": "Matheus"
 }
+### ATUALIZA UMA PESSOA
+PATCH {{baseUrl}}/pessoas/2/
+Content-Type: application/json
+
+{
+    "texto": "Atualizar1 recado"
+}
+### APAGA UMA PESSOA
+DELETE {{baseUrl}}/pessoas/4/
+
+
+#
+
 
 ### AppControllerGetHello 
 
