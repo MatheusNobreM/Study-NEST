@@ -16,11 +16,12 @@ Content-Type: application/json
     "paraId": 10
 }
 ### ATUALIZA UM RECADO
-PATCH {{baseUrl}}/recados/2/
+PATCH {{baseUrl}}/recados/9/
 Content-Type: application/json
 
 {
-    "texto": "Atualizar1 recado"
+    "texto": "bla bla",
+    "lido": true
 }
 ### APAGA UM RECADO
 DELETE {{baseUrl}}/recados/3/

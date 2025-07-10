@@ -28,7 +28,7 @@ export class RecadosService {
 
   throwNotFoundError() {
     //throw new HttpException('Recado não encontrado.', HttpStatus.NOT_FOUND);
-    throw new NotFoundException('Recado não encontrado');
+   throw new NotFoundException('Recado não encontrado');
   }
 
   async findAll() {
@@ -70,9 +70,9 @@ export class RecadosService {
       }
     });
 
-    if (recado) return recado;
+   if (!recado) this.throwNotFoundError();
 
-    this.throwNotFoundError();
+   return recado;
   }
 
   async create(createRecadoDto: CreateRecadoDto) {
@@ -104,18 +104,14 @@ export class RecadosService {
   }
 
   async update(id: number, updateRecadoDto: UpdateRecadoDto) {
-    const partialUpdateRecadoDTO = {
-      lido: updateRecadoDto?.lido,
-      texto: updateRecadoDto?.texto,
-    };
-    const recado = await this.recadoRepository.preload({
-      id,
-      ...updateRecadoDto,
-    });
-
+    const recado = await this.findOne(id);
     if (!recado) return this.throwNotFoundError();
 
-    return this.recadoRepository.save(recado);
+    recado.texto = updateRecadoDto?.texto ?? recado.texto;
+    recado.lido = updateRecadoDto?.lido ?? recado.lido;
+
+    await this.recadoRepository.save(recado);
+    return recado;
   }
 
   async remove(id: number) {
