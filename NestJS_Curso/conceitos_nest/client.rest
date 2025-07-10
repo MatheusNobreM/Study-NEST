@@ -11,9 +11,9 @@ POST {{baseUrl}}/recados/
 Content-Type: application/json
 
 {
-    "texto": "Novo recado",
-    "deId": 8,
-    "paraId": 9
+    "texto": "de 11 para 10",
+    "deId": 11,
+    "paraId": 10
 }
 ### ATUALIZA UM RECADO
 PATCH {{baseUrl}}/recados/2/
@@ -40,9 +40,9 @@ POST {{baseUrl}}/pessoas/
 Content-Type: application/json
 
 {
-    "email": "luiz@email.com",
+    "email": "zezin@email.com",
     "password": "123456",
-    "nome": "Matheus"
+    "nome": "zezin"
 }
 ### ATUALIZA UMA PESSOA
 PATCH {{baseUrl}}/pessoas/7/
@@ -53,7 +53,7 @@ Content-Type: application/json
     "nome": "Matheus M"
 }
 ### APAGA UMA PESSOA
-DELETE {{baseUrl}}/pessoas/4/
+DELETE {{baseUrl}}/pessoas/9/
 
 
 #

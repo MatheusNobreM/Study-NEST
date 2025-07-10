@@ -45,7 +45,7 @@ export class RecadosService {
         para: {
           id: true,
           nome: true,
-        }
+        },
       }
     });
     return recado;
@@ -66,7 +66,7 @@ export class RecadosService {
         para: {
           id: true,
           nome: true,
-        }
+        },
       }
     });
 
