@@ -3,9 +3,10 @@
 # RECADOS
 ### LISTA TODOS OS RECADOS
 GET {{baseUrl}}/recados/
-?limit=100&offset=0
+?limit=10
+&offset=0
 ### LISTA UM RECADO
-GET {{baseUrl}}/recados/7/
+GET {{baseUrl}}/recados/9/
 ### CRIA UM RECADO
 POST {{baseUrl}}/recados/
 Content-Type: application/json
