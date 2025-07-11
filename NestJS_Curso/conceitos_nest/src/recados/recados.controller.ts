@@ -10,6 +10,7 @@ import {
   Patch,
   Post,
   Query,
+  UseInterceptors,
   UsePipes,
 } from '@nestjs/common';
 import { RecadosService } from './recados.service';
@@ -17,6 +18,7 @@ import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recados.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
+import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
 
 @Controller('recados')
 @UsePipes(ParseIntIdPipe)
@@ -25,6 +27,7 @@ export class RecadosController {
 
   @HttpCode(HttpStatus.OK)
   @Get()
+  @UseInterceptors(AddHeaderInterceptor)//cabeçalho
   async findAll(@Query() paginationDto: PaginationDto) {
     //return `Retorna todos os recados. Limit=${limit}, Offset=${offset}`;
     const recado = await this.recadosService.findAll(paginationDto);
