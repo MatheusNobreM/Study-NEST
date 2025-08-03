@@ -19,15 +19,16 @@ import { UpdateRecadoDto } from './dto/update-recados.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
+import { TimingConnectionInterceptor } from 'src/common/interceptors/timing-connection.interceptor';
 
 @Controller('recados')
 @UsePipes(ParseIntIdPipe)
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) {}
 
+  @UseInterceptors(TimingConnectionInterceptor)
   @HttpCode(HttpStatus.OK)
   @Get()
-  @UseInterceptors(AddHeaderInterceptor)//cabeçalho
   async findAll(@Query() paginationDto: PaginationDto) {
     //return `Retorna todos os recados. Limit=${limit}, Offset=${offset}`;
     const recado = await this.recadosService.findAll(paginationDto);
@@ -35,6 +36,7 @@ export class RecadosController {
   }
 
   @Get(':id')
+  @UseInterceptors(AddHeaderInterceptor)//cabeçalho
   findOne(@Param('id') id: number) {
     return this.recadosService.findOne(id);
   }
