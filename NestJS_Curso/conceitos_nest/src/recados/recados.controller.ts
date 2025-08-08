@@ -18,9 +18,11 @@ import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recados.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
+import { AuthTokenInterceptor } from 'src/common/interceptors/auth-token.interceptor';
 
 //@UseInterceptors(SimpleCacheInterceptor)
 //@UseInterceptors(ChangeDataInterceptor)
+@UseInterceptors(AuthTokenInterceptor) // Interceptor para autenticação
 @Controller('recados')
 @UsePipes(ParseIntIdPipe)
 export class RecadosController {
