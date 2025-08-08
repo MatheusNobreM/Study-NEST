@@ -21,13 +21,15 @@ import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
 import { TimingConnectionInterceptor } from 'src/common/interceptors/timing-connection.interceptor';
 import { ErrorHandlingInterceptor } from 'src/common/interceptors/error-handling.interceptor';
+import { SimpleCacheInterceptor } from 'src/common/interceptors/simple-cache.interceptor';
 
+//@UseInterceptors(SimpleCacheInterceptor)
 @Controller('recados')
 @UsePipes(ParseIntIdPipe)
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) {}
 
-  @UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
+  //@UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
   @HttpCode(HttpStatus.OK)
   @Get()
   async findAll(@Query() paginationDto: PaginationDto) {
@@ -37,7 +39,7 @@ export class RecadosController {
   }
 
   @Get(':id')
-  @UseInterceptors(AddHeaderInterceptor, ErrorHandlingInterceptor)//cabeçalho
+  //@UseInterceptors(AddHeaderInterceptor, ErrorHandlingInterceptor)//cabeçalho
   findOne(@Param('id') id: number) {
     return this.recadosService.findOne(id);
   }
